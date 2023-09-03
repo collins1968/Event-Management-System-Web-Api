@@ -27,6 +27,8 @@ namespace Assessment_5.Controllers
         public async Task<ActionResult<SuccessMessage>> AddUser(AddUser newUser)
         {
             var user = _mapper.Map<User>(newUser);
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+            //user.Role = "Admin";
             var result = await _userInterface.AddUserAsync(user);
             var response = new SuccessMessage(200, "user added successfully");
 

@@ -16,6 +16,16 @@ namespace Assessment_5.Services.Interface
         Task<List<User>> GetAllUsersAsync();
         //Get One User
         Task<User> GetUserByIdAsync(Guid id);
+
+        //Get User By Email
+        Task<User> GetUserByEmailAsync(string email);
+        //Login
+        Task<string> LoginAsync(LoginRequest loginRequest);
+        //Logout
+        Task<string> LogoutAsync();
+        //Change Password
+        Task<string> ChangePasswordAsync(ChangePasswordRequest changePasswordRequest);
+
         //Register for an event
         Task<string>RegisterAnEventAsync(RegisterEvent registerEvent);
 

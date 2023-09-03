@@ -3,6 +3,7 @@ using Assessment_5.Requests;
 using Assessment_5.Responses;
 using Assessment_5.Services.Interface;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace Assessment_5.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EventsController : ControllerBase
     {
         private readonly IEventsInterface _eventInterface;
