@@ -35,6 +35,18 @@ namespace Assessment_5.Controllers
             return Ok($"Token: {result}");
         }
 
+        //logout
+        [HttpPost("logout")]
+        public async Task<ActionResult<SuccessMessage>> Logout()
+        {
+            var result = await _userInterface.LogoutAsync();
+            return Ok(result);
+        }
+
+        //reset password
+        //[HttpPost("resetpassword")]
+       
+
 
     }
 }

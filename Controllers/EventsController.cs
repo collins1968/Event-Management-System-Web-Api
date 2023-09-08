@@ -25,6 +25,7 @@ namespace Assessment_5.Controllers
 
         //add event
         [HttpPost]
+        [Authorize(Policy = "Admin")]
         public async Task<ActionResult<SuccessMessage>> AddEvent(AddEvent newEvent)
         {
             var events = _mapper.Map<Event>(newEvent);
@@ -63,6 +64,7 @@ namespace Assessment_5.Controllers
 
         //update event
         [HttpPut("{id}")]
+        [Authorize(Policy = "Admin")]
         public async Task<ActionResult<SuccessMessage>> UpdateEventAsync(Guid id, AddEvent updateEvent)
         {
             var response = await _eventInterface.GetEventById(id);
@@ -77,6 +79,7 @@ namespace Assessment_5.Controllers
 
         //delete event
         [HttpDelete("{id}")]
+        [Authorize(Policy = "Admin")]
         public async Task<ActionResult<SuccessMessage>> DeleteEventAsync(Guid id)
         {
             var response = await _eventInterface.GetEventById(id);

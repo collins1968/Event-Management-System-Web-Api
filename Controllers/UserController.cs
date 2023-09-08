@@ -4,8 +4,10 @@ using Assessment_5.Responses;
 using Assessment_5.Services;
 using Assessment_5.Services.Interface;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace Assessment_5.Controllers
 {
@@ -69,9 +71,10 @@ namespace Assessment_5.Controllers
             var result = await _userInterface.UpdateUserAsync(user);
             return Ok(new SuccessMessage(200, result));
         }
-        
+
         //delete user
         [HttpDelete("{id}")]
+        [Authorize(Policy = "Admin")]
         public async Task<ActionResult<SuccessMessage>> DeleteUserAsync(Guid id)
         {
             var response = await _userInterface.GetUserByIdAsync(id);
@@ -99,8 +102,5 @@ namespace Assessment_5.Controllers
             }
 
         }
-
-
-
     }
 }

@@ -36,11 +36,15 @@ namespace Assessment_5.Services
            
         }
 
-        public async Task<string> ChangePasswordAsync(ChangePasswordRequest changePasswordRequest)
-        {
-            await _context.Users.FirstOrDefaultAsync(x => x.Email == changePasswordRequest.Email && x.Password == changePasswordRequest.Password);
-            return "Password Changed Successfully";
-        }
+        //public async Task<string> ChangePasswordAsync(ChangePasswordRequest changePasswordRequest)
+        //{
+        //    if (changePasswordRequest.NewPassword != changePasswordRequest.ConfirmPassword)
+        //    {
+        //        return "Password does not match";
+        //    }
+        //    await _context.Users.FirstOrDefaultAsync(x => x.Email == changePasswordRequest.Email && x.Password == changePasswordRequest.Password);
+        //    return "Password Changed Successfully";
+        //}
 
         public async Task<string> DeleteUserAsync(User user)
         {
@@ -99,7 +103,8 @@ namespace Assessment_5.Services
                                _configuration.GetValue<string>("TokenSecurity:Audience"),
                                claims: claims,
                                expires: DateTime.Now.AddDays(30),
-                               signingCredentials: creds);
+                               signingCredentials: creds
+                               );
             var tokenHandler = new JwtSecurityTokenHandler();
             return tokenHandler.WriteToken(token);
         }
@@ -129,6 +134,11 @@ namespace Assessment_5.Services
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
             return "User Updated Successfully";
+        }
+
+        public Task<string> ChangePasswordAsync(ChangePasswordRequest changePasswordRequest)
+        {
+            throw new NotImplementedException();
         }
     }
 }

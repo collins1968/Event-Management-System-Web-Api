@@ -2,6 +2,7 @@
 using Assessment_5.Entitites;
 using Assessment_5.Services.Interface;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Assessment_5.Services
 {
@@ -67,8 +68,12 @@ namespace Assessment_5.Services
         //get available slots
         public async Task<int> AvailableSlots(Guid id)
         {
-            var result = await _context.Events.FirstOrDefaultAsync(x => x.Id == id);
+            var result = await _context.Events
+            .Include(e => e.Users)
+
+                                .FirstOrDefaultAsync(e => e.Id == id);
             var availableSlots = result.Capacity - result.Users.Count;
+
             return availableSlots;
         }
     }
